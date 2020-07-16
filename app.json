@@ -1,0 +1,12 @@
+{
+  "name": "unform-examples-mobile",
+  "displayName": "unform-examples-mobile",
+  "expo": {
+    "name": "unform-examples-mobile",
+    "slug": "unform-examples-mobile",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
