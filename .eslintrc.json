@@ -20,13 +20,21 @@
   "plugins": [
     "react",
     "@typescript-eslint",
-    "prettier"
+    "prettier",
+    "react-hooks"
   ],
   "rules": {
     "prettier/prettier": "error",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "react/prop-types": "off",
-    "import/extensions": ["error", "ignorePackages", { "ts": "never", "tsx": "never" }]
+    "react/jsx-props-no-spreading": "off",
+    "no-param-reassign": "off",
+    "no-unused-expressions": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "import/extensions": ["error", "ignorePackages", { "ts": "never", "tsx": "never" }],
+    "import/prefer-default-export": "off",
+    "global-require": "off"
   },
   "settings": {
     "import/resolver": {
