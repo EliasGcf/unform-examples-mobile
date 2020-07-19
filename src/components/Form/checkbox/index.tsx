@@ -2,9 +2,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { useField } from '@unform/core';
-import CheckBox from '@react-native-community/checkbox';
+import CheckBox, { CheckBoxProps } from '@react-native-community/checkbox';
 
-interface Props {
+interface Props extends CheckBoxProps {
   name: string;
   options: {
     value: string;
@@ -27,9 +27,7 @@ const Checkbox: React.FC<Props> = ({ name, options }) => {
     inputRefs.current.forEach((ref, index) => {
       ref.value = options[index].value;
 
-      if (checkboxValues.includes(options[index].value)) {
-        ref.checked = true;
-      }
+      ref.checked = checkboxValues.includes(options[index].value);
     });
   }, [checkboxValues, options]);
 
@@ -40,16 +38,10 @@ const Checkbox: React.FC<Props> = ({ name, options }) => {
       getValue: (refs: InputRefProps[]) => {
         return refs.filter(ref => ref.checked).map(ref => ref.value);
       },
-      clearValue: (refs: InputRefProps[]) => {
-        refs.forEach(ref => {
-          ref.checked = false;
-        });
+      clearValue: () => {
         setCheckboxValues([]);
       },
-      setValue: (refs: InputRefProps[], values) => {
-        refs.forEach(ref => {
-          ref.checked = values.includes(ref.value);
-        });
+      setValue: (_, values) => {
         setCheckboxValues(values);
       },
     });
@@ -57,17 +49,14 @@ const Checkbox: React.FC<Props> = ({ name, options }) => {
 
   return (
     <>
-      {options.map((option, index) => (
+      {options.map(option => (
         <View key={option.value} style={styles.checkboxContainer}>
           <CheckBox
             value={checkboxValues.includes(option.value)}
-            onValueChange={(value: boolean) => {
-              if (inputRefs.current) {
-                inputRefs.current[index].checked = value;
-                setCheckboxValues(state => [
-                  ...new Set([...state, option.value]),
-                ]);
-              }
+            onValueChange={() => {
+              setCheckboxValues(state => [
+                ...new Set([...state, option.value]),
+              ]);
             }}
             ref={ref => inputRefs.current.push(ref as any)}
           />

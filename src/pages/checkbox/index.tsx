@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useCallback, useEffect } from 'react';
+import React, { useRef, useCallback } from 'react';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 
@@ -17,9 +17,6 @@ const CheckboxPage: React.FC = () => {
 
   const handleSubmit = useCallback(data => {
     console.log(data);
-    // formRef.current?.reset();
-    // formRef.current?.setData({ users: [] });
-    formRef.current?.reset();
   }, []);
 
   return (
@@ -27,7 +24,7 @@ const CheckboxPage: React.FC = () => {
       <Form
         ref={formRef}
         onSubmit={handleSubmit}
-        initialData={{ users: ['node'] }}
+        initialData={{ techs: ['node'] }}
       >
         <Logo
           style={{ resizeMode: 'contain' }}
@@ -36,7 +33,7 @@ const CheckboxPage: React.FC = () => {
           }}
         />
 
-        <Checkbox name="users" options={checkboxOptions} />
+        <Checkbox name="techs" options={checkboxOptions} />
 
         <SubmitButton
           title="Send"

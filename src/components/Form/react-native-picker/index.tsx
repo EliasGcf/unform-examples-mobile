@@ -36,7 +36,7 @@ const RNPicker: React.FC<Props> = ({ name, options }) => {
       selectedValue={selectedValue}
       onValueChange={itemValue => setSelectedValue(itemValue)}
     >
-      <Picker.Item color="#c6c6c6" label="Selecione um item" value="" />
+      <Picker.Item color="#c6c6c6" label="Select an item" value="" />
       {options.map(option => (
         <Picker.Item
           color="#000"
