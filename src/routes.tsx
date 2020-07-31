@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from './pages/Home';
 import RNPickerPage from './pages/react-native-picker';
 import CheckboxPage from './pages/checkbox';
+import RNPickerSelectPage from './pages/react-native-picker-select';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,10 @@ const Routes: React.FC = () => {
       <Stack.Navigator screenOptions={{ headerBackTitleVisible: false }}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="react-native-picker" component={RNPickerPage} />
+        <Stack.Screen
+          name="react-native-picker-select"
+          component={RNPickerSelectPage}
+        />
         <Stack.Screen name="checkbox" component={CheckboxPage} />
       </Stack.Navigator>
     </NavigationContainer>

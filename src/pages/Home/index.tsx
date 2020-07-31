@@ -10,12 +10,15 @@ const Home: React.FC = () => {
   const navigation = useNavigation();
 
   const examples = useMemo<string[]>(() => {
-    return ['react-native-picker', 'checkbox'];
+    return ['react-native-picker', 'react-native-picker-select', 'checkbox'];
   }, []);
 
-  const handlePageButton = useCallback((page: string) => {
-    navigation.navigate(page);
-  }, []);
+  const handlePageButton = useCallback(
+    (page: string) => {
+      navigation.navigate(page);
+    },
+    [navigation],
+  );
 
   return (
     <ScrollView contentContainerStyle={{ flex: 1 }}>
