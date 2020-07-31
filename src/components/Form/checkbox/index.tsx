@@ -24,6 +24,7 @@ const Checkbox: React.FC<Props> = ({ name, options }) => {
   const [checkboxValues, setCheckboxValues] = useState<string[]>(defaultValue);
 
   useEffect(() => {
+    console.log(checkboxValues);
     inputRefs.current.forEach((ref, index) => {
       ref.value = options[index].value;
 
@@ -53,10 +54,13 @@ const Checkbox: React.FC<Props> = ({ name, options }) => {
         <View key={option.value} style={styles.checkboxContainer}>
           <CheckBox
             value={checkboxValues.includes(option.value)}
-            onValueChange={() => {
-              setCheckboxValues(state => [
-                ...new Set([...state, option.value]),
-              ]);
+            onValueChange={(isChecked: boolean) => {
+              setCheckboxValues(state => {
+                if (isChecked) {
+                  return [...state, option.value];
+                }
+                return state.filter(value => value !== option.value);
+              });
             }}
             ref={ref => inputRefs.current.push(ref as any)}
           />
