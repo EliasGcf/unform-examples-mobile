@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { useField } from '@unform/core';
 import CheckBox, { CheckBoxProps } from '@react-native-community/checkbox';
@@ -24,13 +24,24 @@ const Checkbox: React.FC<Props> = ({ name, options }) => {
   const [checkboxValues, setCheckboxValues] = useState<string[]>(defaultValue);
 
   useEffect(() => {
-    console.log(checkboxValues);
     inputRefs.current.forEach((ref, index) => {
       ref.value = options[index].value;
 
       ref.checked = checkboxValues.includes(options[index].value);
     });
   }, [checkboxValues, options]);
+
+  const handleToggleOption = useCallback(
+    (isChecked: boolean, optionValue: string) => {
+      setCheckboxValues(state => {
+        if (isChecked) {
+          return [...state, optionValue];
+        }
+        return state.filter(value => value !== optionValue);
+      });
+    },
+    [],
+  );
 
   useEffect(() => {
     registerField<string[]>({
@@ -55,12 +66,7 @@ const Checkbox: React.FC<Props> = ({ name, options }) => {
           <CheckBox
             value={checkboxValues.includes(option.value)}
             onValueChange={(isChecked: boolean) => {
-              setCheckboxValues(state => {
-                if (isChecked) {
-                  return [...state, option.value];
-                }
-                return state.filter(value => value !== option.value);
-              });
+              handleToggleOption(isChecked, option.value);
             }}
             ref={ref => inputRefs.current.push(ref as any)}
           />
