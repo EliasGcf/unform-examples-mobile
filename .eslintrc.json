@@ -26,9 +26,15 @@
   "rules": {
     "prettier/prettier": "error",
     "import/extensions": ["error", "ignorePackages", { "ts": "never", "tsx": "never" }],
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+    "react/require-default-props": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/display-name": "off",
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["error"],
-    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }]
+    "no-unused-expressions": "off",
+    "no-param-reassign": "off"
   },
   "settings": {
     "import/resolver": {
